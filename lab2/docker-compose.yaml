@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+  pytorch_container:
+    container_name: my_custom_container
+    build:
+      context: .
+      dockerfile: /home/stud4/ait2/labs/lab_1/data2/Dockerfile.dockerfile
+    runtime: nvidia
+    volumes:
+      - ./app:/app  # Примонтируем локальную директорию с кодом
+      - ./output:/output  # Примонтируем директорию для сохранения результатов
+    working_dir: /app
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
